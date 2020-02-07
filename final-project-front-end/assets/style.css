@@ -1,0 +1,18 @@
+.app {
+    border-bottom: 5px solid rgb(160, 37, 177);
+    margin-top: 35px;
+}
+
+h4 {
+    color: rgb(226, 147, 77);
+    font-size: 26px;
+    border-bottom: 5px solid rgb(22, 143, 123);
+}
+
+h1 {
+    border-style: groove;
+    border-width: 7px;
+    padding:10px 5px 15px;
+    text-align: center;
+}
+
