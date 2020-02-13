@@ -123,23 +123,32 @@
               <li>reviews.csv - countaing 6 columns and 170,973 rows of reviews matching different listings</li>
             </ul>
             <h3>So what are we looking at?</h3>
-<p>Our initial analysis was done in Jupyter Notebook using pandas and matplotlib. First we looked at occupancy over the next year based on the room type of each listing. </p>
+<p>Our initial analysis was done in Jupyter Notebook using pandas and matplotlib. First, we looked at occupancy since occupancy rate is one of the most high-level indicators of success. 
+  Our listings data had a column called "availability_365" which gave us the number of days available out of the whole year. We took 365 days and subtracted the available days to get 
+the number of days booked for each listing and we divided that by 365 to give us what percentage out of 365 days each listing was booked. </p>
+<p>For our first graph, we grouped by room type to see which listings had highest occupancy percentage.</p>
             <img src="assets/images/occbyroomtype.png">
             <blockquote>
 
    
-<p> Our data has each calendar date over the next year with booking information (price and whether rental is currently booked) for each listing. Since our calendar data starts on 11/29/2019, 
-  you can see a clear spike in number of bookings for Thanksgiving and Christmas which were both just around the corner.
+<p> Our calendar data had each calendar date over the next year with booking information (price and whether rental is currently booked on that date) for each listing. For these graphs, 
+  we grouped by date to calculate out of our listings what percentage of our properties are booked on each date.
+</p>
+<p>
+  Since our calendar data starts on 11/29/2019, you can see a clear spike in number of bookings for Thanksgiving and Christmas which were both just around the corner. 
+  Then it tapers off throughout the rest of the year.
 </p>
 <img src="assets/images/occbydate.png">
 <blockquote>  
-  <p>Next we looked at the average daily rental price over the next year. With clear spikes in weekend costs, the overall average seems to be trending upward. Are listings more expensive the further 
-    out the date?
+  <p>From our calendar data, next we looked at the average daily rental price over the next year. 
+    With clear spikes in weekend costs, the overall average seems to be trending upward.
+    Is that because they price listings higher the further out they are to maximize income 
+    or is that a seasonal trend since most people are less likely to spend money after the holidays?
   </p>
 <img src="assets/images/avgpriceover1yr.png">
 </blockquote>
-<p>Hmmm.... The average daily rental price looks like a heart monitor right out of a hospital room. This is due to 
-  weekend price flucuations. Let's use the bins method to create a clearer picture.</p>
+<p>Hmmm.... The average daily rental price looks like a heart monitor right out of a hospital room because of spikes in weekend 
+  pricing. Let's use the bins method and cut function to create a clearer picture.</p>
   <img src="assets/images/occbypricerange.png">
 </blockquote>
 <h3>Ah, there's our story!</h3>
@@ -152,7 +161,7 @@
             
             <img src="assets/images/corrmatrix.png">
 
-            <p>What!?!?! Accoridng to this, number of Reviews doesnt appear correlated to price at all! Then again, this matrix is kind of small and hard to read. 
+            <p>What!?!?! According to this, number of reviews doesnt appear correlated to price at all! Then again, this matrix is kind of small and hard to read. 
               We need to play with the data more to find out what's going on.
             </p>
             
@@ -161,7 +170,8 @@
  
 
           <nav class="blog-pagination">
-            <a class="btn btn-outline-primary" href="how.html">Click here to follow along to our 'How - Data Analysis' page </a>
+            <a class="btn btn-outline-primary" href="how.html">Click here to follow along to our 
+              'How - Data Analysis' page </a>
             <!-- <a class="btn btn-outline-secondary disabled" href="#">Newer</a> -->
           </nav>
 

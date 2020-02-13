@@ -91,7 +91,11 @@
 <p>So far our model is highly unreliable at predicting anything. Lets check the distribution of our data. A histogram of price shows our distribution is way off.</p>
 <img src="assets/images/how_hist_price_1.png">
 
-<p>A kernal density plot and QQ plot show the same thing... </p>
+<p>A kernal density plot and QQ plot show the same thing... A density plot is a representation of the distribution of a numeric variable. 
+  It uses a kernel density estimate to show the probability density function of the variable. 
+  It is a smoothed version of the histogram and is used in the same concept.</p>
+  <p>A QQ plot is a scatterplot created by plotting two sets of quantiles against one another. If both sets of quantiles came from the same distribution, 
+    we should see the points forming a line that's roughly straight.</p>
 <img src="assets/images/how_skewed_1.png">
  <p>   Our skewness is over 19. As a general rule of thumb: If skewness is less than -1 or greater than 1, the distribution is 
     highly skewed. If skewness is between -1 and -0.5 or between 0.5 and 1, the distribution is 
@@ -106,8 +110,10 @@
     <img src="assets/images/how_box2.png">
     <img src="assets/images/how_box3.png">
 <p>Our data is now only moderately skewed.</p>
-<img src="assets/images/how_fixedskew1.png">
-<img src="assets/images/how_fixedskew2.png">
+
+<div>
+<img src="assets/images/how_fixedskew1.png"><img src="assets/images/how_fixedskew2.png"></div>
+
     <p>Lets see how this effects our machine learning model. After running it through model test, fit, and predict we get:</p>
     <ul>
         <li>Mean Squared Error (MSE): 2655.3317856222598</li>
@@ -115,6 +121,103 @@
         <li>Model Score: 0.02399340931092675</li>
     </ul>
     <p>While our model score is improving (from 10% to approximately 24%) and our R-squared is within acceptable range, we're still far from a reliable model.</p>
+
+<hr>
+    <h1>Linear Regression and PCA</h1>
+    <ol>
+      <li>Used Linear Regression with and without PCA to predict prices with one hot encoding for categorical variables</li>
+      <li>Used Logistic Regression with and without PCA to predict overall satisfaction with one hot encoding for categorical variables </li>
+      <li>Repeat step 3 and 4 with label encoding</li>
+    </ol>
+    <br>
+  
+
+<h3>Conclusion</h3>
+<p>In this data analysis project, I analyzed some of the most popular trends given the Airbnb's data on listings in Asheville. </p>
+<ul>
+  <li>Step 1 Categorize different listings based on room type</li>
+  <li>Set 2 Average Price for each type of listing</li>
+  <li>Set 3 average price for each</li>
+</ul>
+  
+  <p>PCA is used to remove the least beneficial features so you have a smaller data set, but without losing too much predictive power... That's not to say that there aren't examples where PCA improves accuracy by reducing overfitting. However, other practices such as regularization typically do a better job in this situation.
+  </p>
+<ol>
+<li>Categorize listing by Room Type <img src="assets/images/shweta1.png"></li>
+<br>
+<li>Average Price for each type of listing <img src="assets/images/shweta2.png"></li>
+<br>
+<li>Reviews based on price <img src="assets/images/shweta3.png"> <img src="assets/images/shweta4.png"></li>
+</ol>
+<h3>Data Processing </h3>
+<p>Created a DF 'price', 'room_type', 'number_of_reviews', 'neighbourhood', 'availability_365' </p>
+<ul>
+<li>#one hot encoding of the Data Frame for neighborhood and room type   </li>
+<li>#label encoding of the Data Frame for neighborhood and room type</li>
+<li>#drop the original columns and replace them with indicator columns   </li>
+</ul>
+<p>Converted the data to binary </p>
+<ul>
+<li>#split the data and set price as target variable  </li>
+<li>#used the standard deviation method on the dataset  </li>
+<li>#call PCA the number of components (14) to explain the data variance ration.  </li>
+</ul>
+<img src="assets/images/shweta5.png">
+<p>Percentage of information on the components that we keep: 0.9999999999999999</p> 
+  <p> Percentage of information of the components that we discard: 0</p>
+    <p> original shape:    (2441, 14)</p>
+      <p>transformed shape: (2441, 14)</p>
+
+
+<h5>Linear Regression</h5>
+<p>Linear Regression's price deviation with PCA: 69.42511564105892</p>
+<p>Linear Regression's price deviation without PCA: 70.0380384035225</p>
+
+
+<p>R-squared Error with PCA: 0.02699111891813888</p>
+<p>R-squared Error without PCA: 0.02723719769038635</p>
+
+<h5>Pipeline without PCA</h5>
+<p>Logistic Regression Accuracy with PCA: 41  /  733 = 5.5934515688949515 %</p>
+<p>Logistic Regression Accuracy with PCA: 41  /  733 = 5.5934515688949515 %</p>
+
+<br>
+<h5>PCA using Label encoding</h5>
+
+<img src="assets/images/shweta6.png">
+
+
+
+<p> original shape:    (2441, 4)</p>
+      <p>transformed shape: (2441, 3)</p>
+      <p>Percentage of information on the components that we keep: 0.7974111354940395 </p>
+<p>Percentage of information of the components that we discard: 0.20258886450596045</p>
+
+<h5># Linear Regression with/without PCA (label encoding)</h5>
+<p>Linear Regression deviation with PCA: 1.1368683772161603e-13</p>
+<p>Linear Regression deviation without PCA: 1.4210854715202004e-14</p>
+<p>R-squared Error with PCA: 1.0</p>
+<p>R-squared Error without PCA: 1.0</p>
+
+<h5># logistic regression with/without pca (label encoding)</h5>
+<p>Logistic Regression Accuracy with PCA: 83  /  733 = 11.323328785811732 %</p>
+
+<p>Logistic Regression Accuracy without PCA: 83  /  733 = 11.323328785811732 %</p>
+
+<hr>
+<h1>Sentiment Analysis</h1>
+
+<p>First I did a sentiment analysis on each review.  I broke up each review into sentences which had a positive value if it was a positive sentence and negative otherwise.  
+I summed the value of each sentence because the more positive things a reviewer said signaled an overall more positive review.</p>
+
+<p>Then, I average the sentiments per listing</p>
+
+<p>Finally I did a scatter plot of average sentiment versus price, and then average sentiment versus total occupancy.</p>
+<img src="assets/images/rachscatter.png">
+<p>What I found was that there was very little correlation between the sentiment contained in the reviews and those variables.  
+Number of reviews instead of sentiment was far more predictive.</p>
+<img src="assets/images/rachsentiment.png">
+
 
 
           </div><!-- /.blog-post -->
